@@ -23,8 +23,8 @@ final class MovieCollectionDataProvider implements ContextAwareCollectionDataPro
 
     public function getCollection(string $resourceClass, string $operationName = null, array $context = []): iterable
     {
-        $response = $this->tmdbService->findAllMovies();
-        $results = $response->toArray();
+        $results = $this->tmdbService->findAllMovies();
+
         $page = $results["page"];
 
         foreach($results["results"] as $result) {
