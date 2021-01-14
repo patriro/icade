@@ -23,12 +23,11 @@ final class GenreCollectionDataProvider implements ContextAwareCollectionDataPro
 
     public function getCollection(string $resourceClass, string $operationName = null, array $context = []): iterable
     {
-        $results = $this->tmdbService->findAllGenre();
+        $response = $this->tmdbService->findAllGenres();
+        $results = $response->toArray();
 
-        dd($results);
-
-        // Retrieve the blog post collection from somewhere
-        yield new Genre(1, "test1");
-        yield new Genre(2, "test2");
+        foreach($results["genres"] as $result) {
+            yield new Genre($result["id"], $result["name"]);
+        }
     }
 }
