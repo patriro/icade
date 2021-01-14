@@ -6,9 +6,10 @@ use ApiPlatform\Core\Annotation\ApiResource;
 use ApiPlatform\Core\Annotation\ApiProperty;
 
 /**
- * @ApiResource(
- *     collectionOperations={"get"}
- * )
+ *  @ApiResource(
+ *      collectionOperations={"get"},
+ *      itemOperations={"get"}
+ *  )
  */
 class Movie
 {
@@ -128,7 +129,9 @@ class Movie
 
     public function setKeyVideo(string $keyVideo): self
     {
-        $this->keyVideo = $keyVideo;
+        if (!is_null($keyVideo)) {
+            $this->keyVideo = 'https://www.youtube.com/watch?v=' . $keyVideo;
+        }
 
         return $this;
     }
