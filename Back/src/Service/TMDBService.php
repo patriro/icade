@@ -41,7 +41,22 @@ class TMDBService
             );
             $headers = $response->getHeaders();
 
-            return $response;
+            return $response->toArray();
+        } catch (TransportExceptionInterface $e) {
+            throw $e;
+        }
+    }
+
+    public function findMovieById($id)
+    {
+        try {
+            $response = $this->httpClient->request(
+                'GET',
+                'https://api.themoviedb.org/3/movie/' . $id . '?api_key=5da2ecaef1b84326dfa73e2a59680d72&language=fr&append_to_response=videos'
+            );
+            $headers = $response->getHeaders();
+
+            return $response->toArray();
         } catch (TransportExceptionInterface $e) {
             throw $e;
         }
