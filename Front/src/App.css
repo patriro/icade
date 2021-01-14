@@ -1,3 +1,19 @@
 .App {
   font-family: Arial, Helvetica, sans-serif;
 }
+body {
+  padding-top: 80px;
+}
+.GenreList .card{
+  overflow: auto;
+  height: 50%;
+}
+
+.MovieList .card{
+  font-size: 13px;
+  margin-bottom: 5px;
+  cursor: pointer;
+}
+.MovieList .card .voteCount{
+  font-size: 11px;
+}

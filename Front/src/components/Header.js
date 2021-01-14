@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import './Header.css';
 import { Navbar, Nav, Form, FormControl, Button } from 'react-bootstrap';
 
 export class Header extends Component {

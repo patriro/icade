@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import axios from 'axios';
-import ListGroup from 'react-bootstrap/ListGroup'
+import { ListGroup, Card } from 'react-bootstrap'
 
 export class GenreList extends Component {
     constructor(props) {
@@ -28,12 +28,14 @@ export class GenreList extends Component {
     render() {
         const { genres, errorMsg } = this.state
         return (
-            <ListGroup>
-                {genres.length
-                    ? genres.map(genre => <ListGroup.Item action key={genre.id}>{genre.name}</ListGroup.Item>)
-                    : null}
-                {errorMsg ? <div>{errorMsg}</div> : null}
-            </ListGroup>
+            <Card>
+                <ListGroup variant="flush">
+                    {genres.length
+                        ? genres.map(genre => <ListGroup.Item action key={genre.id}>{genre.name}</ListGroup.Item>)
+                        : null}
+                    {errorMsg ? <div>{errorMsg}</div> : null}
+                </ListGroup>
+            </Card>
         )
     }
 }
