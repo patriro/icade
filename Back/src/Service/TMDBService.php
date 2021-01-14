@@ -16,7 +16,7 @@ class TMDBService
         $this->apiKey = $apiKey;
     }
 
-    public function findAllGenre()
+    public function findAllGenres()
     {
         $response = $this->httpClient->request(
             'GET',
