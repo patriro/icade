@@ -25,9 +25,12 @@ RUN apt-get update -qq && apt-get install software-properties-common -qq \
 RUN apt-get install -qq php7.3
 
 RUN apt-get install -qq php7.3-xml \
-    && apt-get install -qq php7.3-pgsql
+    && apt-get install -qq php7.3-pgsql \
+    && apt-get install -qq php7.3-curl
 
 RUN apt-get install zip unzip php7.3-zip -qq
+
+# COPY ./docker/web/php.ini /etc/php/7.3/apache2/php.ini
 
 EXPOSE 80
 
