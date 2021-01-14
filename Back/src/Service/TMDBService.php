@@ -3,6 +3,7 @@
 namespace App\Service;
 
 use Symfony\Contracts\HttpClient\HttpClientInterface;
+use Symfony\Contracts\HttpClient\Exception\TransportExceptionInterface;
 
 class TMDBService
 {
@@ -18,11 +19,16 @@ class TMDBService
 
     public function findAllGenres()
     {
-        $response = $this->httpClient->request(
-            'GET',
-            'https://api.themoviedb.org/3/genre/movie/list?api_key=5da2ecaef1b84326dfa73e2a59680d72&language=fr'
-        );
+        try {
+            $response = $this->httpClient->request(
+                'GET',
+                'https://api.themoviedb.org/3/genre/movie/list?api_key=5da2ecaef1b84326dfa73e2a59680d72&language=fr'
+            );
+            $headers = $response->getHeaders();
 
-        return $response;
+            return $response;
+        } catch (TransportExceptionInterface $e) {
+            throw $e;
+        }
     }
 }
