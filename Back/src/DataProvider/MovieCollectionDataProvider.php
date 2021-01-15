@@ -30,6 +30,7 @@ final class MovieCollectionDataProvider implements ContextAwareCollectionDataPro
     {
         $genreId = null;
         $term = null;
+        $pageNumber = null;
 
         if (!empty($context["filters"]) && array_key_exists("genre", $context["filters"])) {
             $genreId = $context["filters"]["genre"];
@@ -39,7 +40,9 @@ final class MovieCollectionDataProvider implements ContextAwareCollectionDataPro
             $term = $context["filters"]["term"];
         }
 
-        $pageNumber = $context["filters"]["page"];
+        if (!empty($context["filters"]) && array_key_exists("page", $context["filters"])) {
+            $pageNumber = $context["filters"]["page"];
+        }
 
         $results = $this->tmdbService->findAllMovies($genreId, $term, $pageNumber);
 
