@@ -1,12 +1,14 @@
 import React, { Component, useState } from 'react';
 import axios from 'axios';
-import { Card, Col, Row, Modal, ResponsiveEmbed, Image } from 'react-bootstrap'
+import { Card, Col, Row, Modal, ResponsiveEmbed, Image, Button } from 'react-bootstrap'
 import StarRatings from 'react-star-ratings';
 
 export class MovieList extends Component {
     constructor(props) {
         super(props);
+
         this.state = {
+            nextPage: null,
             movies: [],
             movieSelected: false,
             modalIsOpen: false,
@@ -19,6 +21,7 @@ export class MovieList extends Component {
             .get('http://localhost:8080/api/movies')
             .then(response => {
                 this.setState({ movies: response["data"]["hydra:member"] })
+                this.setState({ nextPage: 2 })
             })
             .catch(error => {
                 this.setState({ errorMsg: 'Error retrieving data' })
@@ -29,7 +32,7 @@ export class MovieList extends Component {
 
         if (this.state.movieSelected && id === this.state.movieSelected.id) {
             this.setState({ movieSelected: this.state.movieSelected });
-            this.setState({modalIsOpen: true});
+            this.setState({ modalIsOpen: true });
             return;
         }
 
@@ -38,6 +41,24 @@ export class MovieList extends Component {
             .then(response => {
                 this.setState({ movieSelected: response["data"] });
                 this.setState({ modalIsOpen: true });
+            })
+            .catch(error => {
+                this.setState({ errorMsg: 'Error retrieving movie' })
+            })
+    };
+
+    loadMoreMovies = () => {
+
+        const nextPage = this.state.nextPage;
+        axios
+            .get('http://localhost:8080/api/movies/?page=' + nextPage)
+            .then(response => {
+                const newResponses = response["data"]["hydra:member"];
+                const newArray = [...this.state.movies, ...newResponses];
+
+                this.setState({ movies: newArray});
+                this.setState({ nextPage: this.state.nextPage + 1 });
+                return;
             })
             .catch(error => {
                 this.setState({ errorMsg: 'Error retrieving movie' })
@@ -98,14 +119,14 @@ export class MovieList extends Component {
                                     {movie.title} ({new Date(movie.releaseDate).getFullYear()})
                                 </Col>
                                 <Col className="text-right">
-                                    <StarRatings
+                                    {/* <StarRatings
                                         rating={Number(movie.voteAVG)/2}
                                         starRatedColor="yellow"
                                         numberOfStars={5}
                                         name='rating'
                                         starDimension="15px"
                                         starSpacing="1px"
-                                    /> <span className="voteCount">{movie.voteCount} votes</span>
+                                    /> <span className="voteCount">{movie.voteCount} votes</span> */}
                                 </Col>
                             </Row>
 
@@ -125,6 +146,9 @@ export class MovieList extends Component {
                         </Card.Body>
                     </Card>
                 ))}
+                <div>
+                    <Button variant="outline-primary" onClick={this.loadMoreMovies}>Load More Content</Button>
+                </div>
             </div>
         );
     }
