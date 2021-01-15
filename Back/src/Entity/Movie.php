@@ -127,10 +127,10 @@ class Movie
         return $this->keyVideo;
     }
 
-    public function setKeyVideo(string $keyVideo): self
+    public function setKeyVideo($keyVideo): self
     {
         if (!is_null($keyVideo)) {
-            $this->keyVideo = 'https://www.youtube.com/watch?v=' . $keyVideo;
+            $this->keyVideo = 'https://www.youtube.com/embed/' . $keyVideo;
         }
 
         return $this;
