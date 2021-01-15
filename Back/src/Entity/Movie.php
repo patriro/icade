@@ -12,7 +12,7 @@ use ApiPlatform\Core\Annotation\ApiResource;
  *      collectionOperations={"get"},
  *      itemOperations={"get"}
  *  )
- * @ApiFilter(GenreFilter::class, properties={"genre"})
+ * @ApiFilter(GenreFilter::class, properties={"genre", "title"})
  */
 class Movie
 {

@@ -32,6 +32,17 @@ final class GenreFilter extends AbstractContextAwareFilter
                 ],
             ];
 
+            $description["term"] = [
+                'property' => "term",
+                'type' => 'string',
+                'required' => false,
+                'swagger' => [
+                    'description' => 'Filter by term',
+                    'name' => 'Term',
+                    'type' => 'Will appear below the name in the Swagger documentation',
+                ],
+            ];
+
         return $description;
     }
 }
