@@ -14,7 +14,6 @@ final class CustomFilter extends AbstractContextAwareFilter
 
     protected function splitPropertyParts(string $property): array { return []; }
 
-    // This function is only used to hook in documentation generators (supported by Swagger and Hydra)
     public function getDescription(string $resourceClass): array
     {
         if (!$this->properties) {
