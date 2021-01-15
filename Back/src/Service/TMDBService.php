@@ -20,10 +20,17 @@ class TMDBService
     private function defaultParam()
     {
         return [
-            'query' => [
-                'api_key' => $this->apiKey,
-                'language' => 'fr',
-                ]
+            'api_key' => $this->apiKey,
+            'language' => 'fr',
+        ];
+    }
+
+    private function buildCustomParam($customParams)
+    {
+        $defaultParams = $this->defaultParam();
+
+        return [
+            'query' => array_merge($customParams, $defaultParams),
         ];
     }
 
@@ -33,7 +40,7 @@ class TMDBService
             $response = $this->tmdb->request(
                 'GET',
                 '/3/genre/movie/list',
-                $this->defaultParam(),
+                $this->buildCustomParam([]),
             );
             $headers = $response->getHeaders();
 
@@ -45,21 +52,33 @@ class TMDBService
 
     public function findAllMovies($genreId, $term, $pageNumber)
     {
-        $url = '/3/movie/popular?page=' . $pageNumber;
+        $url = '/3/movie/popular';
+        $customParams = [
+            'page' => $pageNumber,
+        ];
 
         if (!is_null($genreId)) {
-            $url = '/3/discover/movie?sort_by=popularity.desc&with_genres=' . $genreId . '&page=' . $pageNumber;
+            $url = '/3/discover/movie';
+            $customParams = [
+                'sort_by' => 'popularity.desc',
+                'with_genres' => $genreId,
+                'page' => $pageNumber,
+            ];
         }
 
         if (!is_null($term)) {
-            $url = '/3/search/movie?query=' . $term . '&page=' . $pageNumber;
+            $url = '/3/search/movie';
+            $customParams = [
+                'query' => $term,
+                'page' => $pageNumber,
+            ];
         }
 
         try {
             $response = $this->tmdb->request(
                 'GET',
                 $url,
-                $this->defaultParam()
+                $this->buildCustomParam($customParams)
             );
             $headers = $response->getHeaders();
 
@@ -71,11 +90,14 @@ class TMDBService
 
     public function findMovieById($id)
     {
+        $customParams = [
+            'append_to_response' => 'videos'
+        ];
         try {
             $response = $this->tmdb->request(
                 'GET',
-                '/3/movie/' . $id . '?append_to_response=videos',
-                $this->defaultParam(),
+                '/3/movie/' . $id,
+                $this->buildCustomParam($customParams),
             );
             $headers = $response->getHeaders();
 
