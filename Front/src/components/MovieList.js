@@ -73,19 +73,23 @@ export class MovieList extends Component {
                         </div>
                         <div>
                             <p>Titre Original : {movieSelected.originTitle}</p>
-                            <p>Description : {movieSelected.overview}</p>
+                            <p>Description : <em>{movieSelected.overview}</em></p>
+                            <p>Catégorie : <em>{movieSelected.genre.map(genre =>
+                            <span>
+                                {genre.name + ' '}
+                            </span>)}</em></p>
                         </div>
                         </Modal.Body>
                         <Modal.Footer>
-                        <StarRatings
-                            rating={Number(movieSelected.voteAVG) / 2}
-                            starRatedColor="yellow"
-                            numberOfStars={5}
-                            name='rating'
-                            starDimension="15px"
-                            starSpacing="1px"
-                        />
-                        <span className="voteCount">{movieSelected.voteCount} votes</span>
+                            <StarRatings
+                                rating={Number(movieSelected.voteAVG) / 2}
+                                starRatedColor="yellow"
+                                numberOfStars={5}
+                                name='rating'
+                                starDimension="15px"
+                                starSpacing="1px"
+                            />
+                            <span className="voteCount">{movieSelected.voteCount} votes</span>
                         </Modal.Footer>
                     </Modal>
                 }
