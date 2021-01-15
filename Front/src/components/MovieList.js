@@ -37,12 +37,10 @@ export class MovieList extends Component {
         axios
             .get('http://localhost:8080/api/movies/' + id)
             .then(response => {
-                console.log(response);
                 this.setState({ movieSelected: response["data"] });
                 this.setState({ modalIsOpen: true });
             })
             .catch(error => {
-                console.log(error)
                 this.setState({ errorMsg: 'Error retrieving movie' })
             })
     };
