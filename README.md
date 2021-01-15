@@ -16,7 +16,7 @@ Le Project WeCine est un projet merveilleux auquel nous affichons une liste de f
 
 # New Features!
 
-  - Intérfaçage ave L'API de TMDb
+  - Intérfaçage avec L'API de TMDb
   - Récupération de la liste des films
   - Récupération de la liste des genres de films
   - Mise en place d'une barre de recherche (live)
