@@ -26,6 +26,7 @@ final class MovieItemDataProvider implements ItemDataProviderInterface, Restrict
     public function getItem(string $resourceClass, $id, string $operationName = null, array $context = []): ?Movie
     {
         $result = $this->tmdbService->findMovieById($id);
+        $video = $result["videos"]["results"][0]["key"] ?? null;
 
         return (new Movie())
             ->setId($result["id"])
@@ -34,7 +35,7 @@ final class MovieItemDataProvider implements ItemDataProviderInterface, Restrict
             ->setReleaseDate($result["release_date"])
             ->setImg($result["poster_path"])
             ->setOverview($result["overview"])
-            ->setKeyVideo($result["videos"]["results"][0]["key"])
+            ->setKeyVideo($video)
             ->setVoteAVG($result["vote_average"])
             ->setVoteCount($result["vote_count"])
         ;
