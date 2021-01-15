@@ -32,12 +32,16 @@ class TMDBService
         }
     }
 
-    public function findAllMovies($genreId)
+    public function findAllMovies($genreId, $term)
     {
         $url = 'https://api.themoviedb.org/3/movie/popular?api_key=5da2ecaef1b84326dfa73e2a59680d72&language=fr';
 
         if (!is_null($genreId)) {
             $url = 'https://api.themoviedb.org/3/discover/movie?api_key=5da2ecaef1b84326dfa73e2a59680d72&language=fr&sort_by=popularity.desc&include_adult=false&include_video=false&page=1&with_genres=' . $genreId;
+        }
+
+        if (!is_null($term)) {
+            $url = 'https://api.themoviedb.org/3/search/movie?api_key=5da2ecaef1b84326dfa73e2a59680d72&language=fr&query=' . $term . '&page=1&include_adult=false';
         }
 
         try {
