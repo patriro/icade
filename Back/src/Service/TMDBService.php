@@ -7,22 +7,33 @@ use Symfony\Contracts\HttpClient\Exception\TransportExceptionInterface;
 
 class TMDBService
 {
-    private $httpClient;
+    private $tmdb;
 
     private $apiKey;
 
-    public function __construct(HttpClientInterface $httpClient, $apiKey)
+    public function __construct(HttpClientInterface $tmdb, $apiKey)
     {
-        $this->httpClient = $httpClient;
+        $this->tmdb = $tmdb;
         $this->apiKey = $apiKey;
+    }
+
+    private function defaultParam()
+    {
+        return [
+            'query' => [
+                'api_key' => $this->apiKey,
+                'language' => 'fr',
+                ]
+        ];
     }
 
     public function findAllGenres()
     {
         try {
-            $response = $this->httpClient->request(
+            $response = $this->tmdb->request(
                 'GET',
-                'https://api.themoviedb.org/3/genre/movie/list?api_key=5da2ecaef1b84326dfa73e2a59680d72&language=fr'
+                '/3/genre/movie/list',
+                $this->defaultParam(),
             );
             $headers = $response->getHeaders();
 
@@ -45,7 +56,7 @@ class TMDBService
         }
 
         try {
-            $response = $this->httpClient->request(
+            $response = $this->tmdb->request(
                 'GET',
                 $url
             );
@@ -60,7 +71,7 @@ class TMDBService
     public function findMovieById($id)
     {
         try {
-            $response = $this->httpClient->request(
+            $response = $this->tmdb->request(
                 'GET',
                 'https://api.themoviedb.org/3/movie/' . $id . '?api_key=5da2ecaef1b84326dfa73e2a59680d72&language=fr&append_to_response=videos'
             );
