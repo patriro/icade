@@ -6,7 +6,6 @@ import StarRatings from 'react-star-ratings';
 export class MovieList extends Component {
     constructor(props) {
         super(props);
-
         this.state = {
             movies: [],
             movieSelected: false,
@@ -48,7 +47,6 @@ export class MovieList extends Component {
     closeModal = () => this.setState({ modalIsOpen: false });
 
     render() {
-
         const { movies, errorMsg, movieSelected } = this.state;
 
         return (
