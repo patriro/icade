@@ -6,7 +6,7 @@ body {
 }
 .GenreList .card{
   overflow: auto;
-  height: 50%;
+  height: 300px;
 }
 
 .MovieList .card{
