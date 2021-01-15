@@ -42,7 +42,7 @@ final class MovieCollectionDataProvider implements ContextAwareCollectionDataPro
             $pageNumber = $context["filters"]["page"];
         }
 
-        $results = $this->tmdbService->findAllMovies($genreId, $term, $pageNumber);
+        $results = $this->tmdbService->findMovies($genreId, $term, $pageNumber);
 
         $page = $results["page"];
 

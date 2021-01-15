@@ -51,7 +51,7 @@ class TMDBService
         }
     }
 
-    public function findAllMovies($genreId, $term, $pageNumber)
+    public function findMovies($genreId, $term, $pageNumber)
     {
         $url = '/3/movie/popular';
         $customParams = [
