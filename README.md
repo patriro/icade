@@ -12,7 +12,7 @@ Le Project WeCine est un projet merveilleux auquel nous affichons une liste de f
 
 ### Pré-requis
  - Docker
- - Une connexion internet (paqués, composer...)
+ - Une connexion internet (paquets, composer...)
 
 # New Features!
 
