@@ -73,7 +73,7 @@ export class MovieList extends Component {
                             <p>Titre Original : {movieSelected.originTitle}</p>
                             <p>Description : <em>{movieSelected.overview}</em></p>
                             <p>Catégorie : <em>{movieSelected.genre.map(genre =>
-                            <span>
+                            <span key={genre.id}>
                                 {genre.name + ' '}
                             </span>)}</em></p>
                         </div>
