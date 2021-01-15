@@ -11,8 +11,11 @@ final class MovieCollectionDataProvider implements ContextAwareCollectionDataPro
 {
     private $tmdbService;
 
-    public function __construct(TMDBService $tmdbService)
+    private $itemExtensions;
+
+    public function __construct(iterable $itemExtensions, TMDBService $tmdbService)
     {
+        $this->itemExtensions = $itemExtensions;
         $this->tmdbService = $tmdbService;
     }
 
@@ -40,6 +43,8 @@ final class MovieCollectionDataProvider implements ContextAwareCollectionDataPro
         }
 
         $results = $this->tmdbService->findAllMovies($genreId, $term, $pageNumber);
+
+        $page = $results["page"];
 
         foreach($results["results"] as $result) {
             yield (new Movie())
