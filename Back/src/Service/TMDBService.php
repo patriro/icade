@@ -32,12 +32,18 @@ class TMDBService
         }
     }
 
-    public function findAllMovies()
+    public function findAllMovies($genreId)
     {
+        $url = 'https://api.themoviedb.org/3/movie/popular?api_key=5da2ecaef1b84326dfa73e2a59680d72&language=fr';
+
+        if (!is_null($genreId)) {
+            $url = 'https://api.themoviedb.org/3/discover/movie?api_key=5da2ecaef1b84326dfa73e2a59680d72&language=fr&sort_by=popularity.desc&include_adult=false&include_video=false&page=1&with_genres=' . $genreId;
+        }
+
         try {
             $response = $this->httpClient->request(
                 'GET',
-                'https://api.themoviedb.org/3/movie/popular?api_key=5da2ecaef1b84326dfa73e2a59680d72&language=fr'
+                $url
             );
             $headers = $response->getHeaders();
 
