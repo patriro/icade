@@ -32,6 +32,7 @@ final class MovieItemDataProvider implements ItemDataProviderInterface, Restrict
             ->setId($result["id"])
             ->setTitle($result["title"])
             ->setOriginTitle($result["original_title"])
+            ->setGenre($result["genres"])
             ->setReleaseDate($result["release_date"])
             ->setImg($result["poster_path"])
             ->setOverview($result["overview"])
