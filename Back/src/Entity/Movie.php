@@ -2,7 +2,7 @@
 
 namespace App\Entity;
 
-use App\Filter\GenreFilter;
+use App\Filter\CustomFilter;
 use ApiPlatform\Core\Annotation\ApiFilter;
 use ApiPlatform\Core\Annotation\ApiProperty;
 use ApiPlatform\Core\Annotation\ApiResource;
@@ -12,7 +12,7 @@ use ApiPlatform\Core\Annotation\ApiResource;
  *      collectionOperations={"get"},
  *      itemOperations={"get"}
  *  )
- * @ApiFilter(GenreFilter::class, properties={"genre", "title"})
+ * @ApiFilter(CustomFilter::class, properties={"genre", "title"})
  */
 class Movie
 {
