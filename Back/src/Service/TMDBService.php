@@ -42,6 +42,7 @@ class TMDBService
                 '/3/genre/movie/list',
                 $this->buildCustomParam([]),
             );
+            // Can also trigger an error if the request doesn't
             $headers = $response->getHeaders();
 
             return $response;
