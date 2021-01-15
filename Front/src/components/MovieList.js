@@ -119,14 +119,14 @@ export class MovieList extends Component {
                                     {movie.title} ({new Date(movie.releaseDate).getFullYear()})
                                 </Col>
                                 <Col className="text-right">
-                                    {/* <StarRatings
+                                    <StarRatings
                                         rating={Number(movie.voteAVG)/2}
                                         starRatedColor="yellow"
                                         numberOfStars={5}
                                         name='rating'
                                         starDimension="15px"
                                         starSpacing="1px"
-                                    /> <span className="voteCount">{movie.voteCount} votes</span> */}
+                                    /> <span className="voteCount">{movie.voteCount} votes</span>
                                 </Col>
                             </Row>
 
