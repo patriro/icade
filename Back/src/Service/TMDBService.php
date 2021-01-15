@@ -45,20 +45,21 @@ class TMDBService
 
     public function findAllMovies($genreId, $term, $pageNumber)
     {
-        $url = 'https://api.themoviedb.org/3/movie/popular?api_key=5da2ecaef1b84326dfa73e2a59680d72&language=fr&page=' . $pageNumber;
+        $url = '/3/movie/popular?page=' . $pageNumber;
 
         if (!is_null($genreId)) {
-            $url = 'https://api.themoviedb.org/3/discover/movie?api_key=5da2ecaef1b84326dfa73e2a59680d72&language=fr&sort_by=popularity.desc&include_adult=false&include_video=false&page=1&with_genres=' . $genreId . '&page=' . $pageNumber;
+            $url = '/3/discover/movie?sort_by=popularity.desc&with_genres=' . $genreId . '&page=' . $pageNumber;
         }
 
         if (!is_null($term)) {
-            $url = 'https://api.themoviedb.org/3/search/movie?api_key=5da2ecaef1b84326dfa73e2a59680d72&language=fr&query=' . $term . '&page=1&include_adult=false&page=' . $pageNumber;
+            $url = '/3/search/movie?query=' . $term . '&page=' . $pageNumber;
         }
 
         try {
             $response = $this->tmdb->request(
                 'GET',
-                $url
+                $url,
+                $this->defaultParam()
             );
             $headers = $response->getHeaders();
 
@@ -73,7 +74,8 @@ class TMDBService
         try {
             $response = $this->tmdb->request(
                 'GET',
-                'https://api.themoviedb.org/3/movie/' . $id . '?api_key=5da2ecaef1b84326dfa73e2a59680d72&language=fr&append_to_response=videos'
+                '/3/movie/' . $id . '?append_to_response=videos',
+                $this->defaultParam(),
             );
             $headers = $response->getHeaders();
 
