@@ -15,3 +15,11 @@ framework:
     #fragments: true
     php_errors:
         log: true
+
+    http_client:
+        scoped_clients:
+            tmdb:
+                base_uri: 'https://api.themoviedb.org/'
+                headers:
+                    Content-Type: 'application/json'
+                    Access-Control-Allow-Origin: '*'
