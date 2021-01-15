@@ -10,21 +10,9 @@ use ApiPlatform\Core\Bridge\Doctrine\Orm\Filter\ContextAwareFilterInterface;
 
 final class GenreFilter extends AbstractContextAwareFilter
 {
-    protected function filterProperty(string $property, $value, QueryBuilder $queryBuilder, QueryNameGeneratorInterface $queryNameGenerator, string $resourceClass, string $operationName = null)
-    {
-        // otherwise filter is applied to order and page as well
-        if (
-            !$this->isPropertyEnabled($property, $resourceClass) ||
-            !$this->isPropertyMapped($property, $resourceClass)
-        ) {
-            return;
-        }
+    protected function filterProperty(string $property, $value, QueryBuilder $queryBuilder, QueryNameGeneratorInterface $queryNameGenerator, string $resourceClass, string $operationName = null) { }
 
-        $parameterName = $queryNameGenerator->generateParameterName($property); // Generate a unique parameter name to avoid collisions with other filters
-        $queryBuilder
-            ->andWhere(sprintf('REGEXP(o.%s, :%s) = 1', $property, $parameterName))
-            ->setParameter($parameterName, $value);
-    }
+    protected function splitPropertyParts(string $property): array { return []; }
 
     // This function is only used to hook in documentation generators (supported by Swagger and Hydra)
     public function getDescription(string $resourceClass): array
