@@ -29,26 +29,31 @@ final class MovieCollectionDataProvider implements ContextAwareCollectionDataPro
     public function getCollection(string $resourceClass, string $operationName = null, array $context = []): iterable
     {
         $genreId = null;
+        $term = null;
 
         if (!empty($context["filters"]) && array_key_exists("genre", $context["filters"])) {
             $genreId = $context["filters"]["genre"];
         }
 
-        $results = $this->tmdbService->findAllMovies($genreId);
+        if (!empty($context["filters"]) && array_key_exists("term", $context["filters"])) {
+            $term = $context["filters"]["term"];
+        }
+
+        $results = $this->tmdbService->findAllMovies($genreId, $term);
 
         $page = $results["page"];
 
         foreach($results["results"] as $result) {
             yield (new Movie())
                 ->setId($result["id"])
-                ->setTitle($result["title"])
-                ->setOriginTitle($result["original_title"])
-                ->setReleaseDate($result["release_date"])
-                ->setImg($result["poster_path"])
-                ->setOverview($result["overview"])
-                ->setGenre($result["genre_ids"])
-                ->setVoteAVG($result["vote_average"])
-                ->setVoteCount($result["vote_count"])
+                ->setTitle($result["title"] ?? null)
+                ->setOriginTitle($result["original_title"] ?? null)
+                ->setReleaseDate($result["release_date"] ?? null)
+                ->setImg($result["poster_path"] ?? null)
+                ->setOverview($result["overview"] ?? null)
+                ->setGenre($result["genre_ids"] ?? null)
+                ->setVoteAVG($result["vote_average"] ?? null)
+                ->setVoteCount($result["vote_count"] ?? null)
             ;
         }
     }

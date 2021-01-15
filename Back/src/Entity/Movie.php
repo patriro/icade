@@ -70,7 +70,7 @@ class Movie
         return $this->releaseDate;
     }
 
-    public function setReleaseDate(string $releaseDate): self
+    public function setReleaseDate($releaseDate): self
     {
         $this->releaseDate = $releaseDate;
 
@@ -82,7 +82,7 @@ class Movie
         return $this->originTitle;
     }
 
-    public function setOriginTitle(string $originTitle): self
+    public function setOriginTitle($originTitle): self
     {
         $this->originTitle = $originTitle;
 
@@ -94,7 +94,7 @@ class Movie
         return $this->overview;
     }
 
-    public function setOverview(string $overview): self
+    public function setOverview($overview): self
     {
         $this->overview = $overview;
 
@@ -106,7 +106,7 @@ class Movie
         return $this->img;
     }
 
-    public function setImg(string $img): self
+    public function setImg($img): self
     {
         $this->img = 'https://image.tmdb.org/t/p/w200/' . $img;
 
@@ -144,7 +144,7 @@ class Movie
         return $this->voteAVG;
     }
 
-    public function setVoteAVG(string $voteAVG): self
+    public function setVoteAVG($voteAVG): self
     {
         $this->voteAVG = $voteAVG;
 
@@ -156,7 +156,7 @@ class Movie
         return $this->voteCount;
     }
 
-    public function setVoteCount(int $voteCount): self
+    public function setVoteCount($voteCount): self
     {
         $this->voteCount = $voteCount;
 
