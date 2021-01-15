@@ -4,7 +4,7 @@
   "description": "icade",
   "main": "index.js",
   "scripts": {
-    "start": "webpack-dev-server --host 0.0.0.0 -d --config webpack.config.js --content-base public/ --progress --colors --hot",
+    "start": "./node_modules/.bin/webpack-dev-server --host 0.0.0.0 -d --config webpack.config.js --content-base public/ --progress --colors --hot",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
