@@ -1,6 +1,7 @@
 import React, { Component, useState } from 'react';
-import { Navbar, Nav, Form, FormControl, Button, Dropdown } from 'react-bootstrap';
+import { Navbar, Nav, Form, Dropdown } from 'react-bootstrap';
 import axios from 'axios';
+import './Header.css';
 
 export class Header extends Component {
     constructor() {
@@ -39,7 +40,6 @@ export class Header extends Component {
         axios
             .get('http://localhost:8080/api/movies?term=' + term)
             .then(response => {
-                console.log(response);
                 this.setState({ movies: response["data"]["hydra:member"] })
             })
             .catch(error => {
@@ -63,15 +63,14 @@ export class Header extends Component {
                             />
                         </Dropdown.Toggle>
 
-                        <Dropdown.Menu>
+                        <Dropdown.Menu className="DropMenu">
                             {movies.map((movie, index) => (
                                 <div>
-                                    <Dropdown.Item key={movie.id}>{movie.title}</Dropdown.Item>
+                                    <Dropdown.Item key={movie.id}>{movie.title} ({new Date(movie.releaseDate).getFullYear()})</Dropdown.Item>
                                 </div>
                             ))}
                         </Dropdown.Menu>
                     </Dropdown>
-                    <Button variant="outline-info">Rechercher</Button>
                 </Form>
             </Navbar>
         )
