@@ -37,6 +37,10 @@ export class Header extends Component {
 
     searchMovie = () => {
         const term = this.state.text;
+        if (term === '') {
+            return;
+        }
+
         axios
             .get('http://localhost:8080/api/movies?term=' + term)
             .then(response => {
