@@ -34,3 +34,7 @@ services:
     App\Service\TMDBService:
         arguments:
             $apiKey: '%api_key%'
+
+    App\DataProvider\MovieCollectionDataProvider:
+        arguments:
+          $itemExtensions: !tagged api_platform.doctrine.orm.query_extension.item

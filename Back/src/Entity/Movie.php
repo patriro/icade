@@ -2,14 +2,17 @@
 
 namespace App\Entity;
 
-use ApiPlatform\Core\Annotation\ApiResource;
+use App\Filter\GenreFilter;
+use ApiPlatform\Core\Annotation\ApiFilter;
 use ApiPlatform\Core\Annotation\ApiProperty;
+use ApiPlatform\Core\Annotation\ApiResource;
 
 /**
  *  @ApiResource(
  *      collectionOperations={"get"},
  *      itemOperations={"get"}
  *  )
+ * @ApiFilter(GenreFilter::class, properties={"genre"})
  */
 class Movie
 {
